@@ -27,7 +27,12 @@ pipeline {
                step([$class: 'WsCleanup']) 
                }
                }
-        
+       stage('checkout code'){
+          steps {
+               
+               git credentialsId: 'python_dashboard_app', url: 'https://github.com/LEOPARDO7/python_dashboard.git'
+               }
+               }  
        stage('push image'){
           steps {
               script{

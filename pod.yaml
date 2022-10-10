@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo
+  labels:
+    app: pod12
+    type: app
+spec:
+  serviceAccountName: app
+  containers:
+  - name: demoapp12
+    image: cloudzenix/python_dashboard_app
+    ports:
+    - containerPort: 33222

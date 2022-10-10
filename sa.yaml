@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app
+  namespace: default
+  annotations:
+          #eks.amazonaws.com/role-arn: arn:aws:iam::602011150591:role/irsa_billing
+    eks.amazonaws.com/role-arn: arn:aws:iam::978322299160:role/cz_dashboard_role

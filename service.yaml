@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashlb12
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 33222
+    targetPort: 33222
+    protocol: TCP
+  selector:
+    app: pod12
+

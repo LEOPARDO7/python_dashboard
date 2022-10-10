@@ -39,7 +39,7 @@ pipeline {
               script{
                try {
                sh '''
-                docker build -t demo1:latest -f ./dockerfile 
+                docker build -t demo1:latest . 
                '''
               } catch(def exception){
                 echo"Cathch error ${exception}"

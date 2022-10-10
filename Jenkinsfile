@@ -1,6 +1,11 @@
 pipeline {
     
     agent any
+    
+      
+    environment {
+        WORKSPACE        =  pwd()
+    }
 
 
      options { 

@@ -1,24 +1,16 @@
-def COMMIT_MSGS = ''
-def LIST = ''
-def CONT_INST = ''
 pipeline {
     
     agent any
-    
-    environment {
-        WORKSPACE        =  pwd()
-        NEXUS_SCRT      = credentials('nexus_Scrt')
-        NEXUS_DOCRED    = credentials('nexusdocred')
-        DOCKER_TKN   = credentials('Docker_lst_Tkn')
-    }
+
+
      options { 
             buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
             skipDefaultCheckout()
             disableConcurrentBuilds()
     } 
-    stages {
-        stage('Cleanup Workspace'){
-            steps {
+     stages {
+       stage('Cleanup Workspace'){
+          steps {
                println "${env.BRANCH_NAME}"
                cleanWs()
                //clean up temp directory
@@ -35,10 +27,20 @@ pipeline {
                step([$class: 'WsCleanup']) 
                }
                }
-
-
-
-       
         
+       stage('push image'){
+          steps {
+              script{
+               try {
+               sh '''
+                docker build -t demo1:latest . 
+               '''
+              } catch(def exception){
+                echo"Cathch error ${exception}"
+                slackSend channel: "#indiatechteam", message: "Docker stage failed: ${env.JOB_NAME} ${env.BUILD_NUMBER} ${exception}"
+                }
+             }
+           }
+        }
     }
  }

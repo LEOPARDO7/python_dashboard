@@ -37,6 +37,7 @@ pipeline {
                
                git credentialsId: 'git_1', url: 'https://github.com/LEOPARDO7/python_dashboard.git'
                sh "ls"
+               sh "pwd"
                }
                }  
        stage('push image'){

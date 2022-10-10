@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+        <title>Login Page</title>
+        <style>
+            #new1    
+            {
+                margin: 50px;
+                outline: 1px solid black;
+                outline-offset: 20px;
+            }
+        </style>
+</head>
+<body>
+    <center>
+    <div style="text-align: center;">
+        <img src="https://cloudzenix.com/wp-content/uploads/2018/05/cz-wide-1536x384.png" alt="Trulli" width="200" height="100">
+      </div>
+        <div class="container my-5" style="width: 700px;">
+              <h2 style="color:blue;">Welcome to CloudZenix Billing Dashboard</h2>
+        </div>
+
+    <li><a href='{{ auth_url }}'>Sign In</a></li>
+
+    {% if config.get("B2C_RESET_PASSWORD_AUTHORITY") %}
+    <li><a href='{{_build_auth_code_flow(authority=config["B2C_RESET_PASSWORD_AUTHORITY"])["auth_uri"]}}'>Reset Password</a></li>
+    {% endif %}
+
+    <hr>
+    <footer style="text-align: right">Powered by MSAL Python {{ version }}</footer>
+    </center>
+</body>
+</html>
+
+

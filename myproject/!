@@ -1,0 +1,46 @@
+import boto3
+from flask import Flask, render_template, request
+from boto3.session import Session
+import s3access, bill
+
+app = Flask(__name__,template_folder='template')
+
+@app.route("/")
+def login():
+    return render_template('login.html')
+
+@app.route('/index.html', methods = ['POST', 'GET'])
+def index():
+    list = ["sharath", "prasad", "karthik", "vijay"]
+    output = request.form.to_dict()
+    name = output['name']
+    if name in list:
+      return render_template('index.html')
+    else:
+      return render_template('login.html')
+     
+
+@app.route('/table', methods = ['POST', 'GET'])
+def myfun():
+    output = request.form.to_dict()
+    name = output['name']
+    reg = output['region']
+    ser = output['service']
+    st = output['state']
+    if ser == 'ec2':
+      s3access.instances(name, reg, st)
+      return render_template('table.html')
+
+@app.route('/bill' , methods = ['POST', 'GET'])
+def billing():   
+  return render_template('bill.html')
+      
+@app.route('/billy', methods = ['POST', 'GET'])
+def bille(): 
+    output = request.form.to_dict()
+    name = output['name1']
+    reg = output['region1']
+    bill.billy(name, reg)  
+    return render_template('billy.html')
+
+app.run(debug=True, host='0.0.0.0')
